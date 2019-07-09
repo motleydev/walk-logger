@@ -11,6 +11,7 @@ export default function Template({ data }) {
       <Helmet title={`Your Blog Name - ${gcms.walk.name}`} />
       <div className="blog-post">
         <h1>{gcms.walk.name}</h1>
+        <h2>{gcms.walk.mo_products[0].name}</h2>
       </div>
     </div>
   )
@@ -23,6 +24,10 @@ query WalkQuery($slug: String!) {
         slug: $slug
       }) {
         name
+        products
+        mo_products {
+            name
+        }
       }
     }
   }
