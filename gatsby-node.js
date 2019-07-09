@@ -5,3 +5,27 @@
  */
 
 // You can delete this file if you're not using it
+
+exports.createResolvers = ({ createResolvers }) => {
+    const resolvers  = {
+        GCMS_Walk: {
+        mo_products: {
+            type: ['MoltinProduct'], resolve: (source, args, context, info) => {
+                return context.nodeModel.runQuery({
+                    query: {
+                        filter: {
+                            sku: {
+                                in: source.products
+                            }
+                        }
+                    },
+                    type: "MoltinProduct",
+                    firstOnly: false
+                })
+            }
+        }
+    }
+    }
+
+    createResolvers(resolvers)
+}
